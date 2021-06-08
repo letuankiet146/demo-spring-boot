@@ -22,4 +22,7 @@ Project use to practice Spring Boot that include of: Spring WebMVC+ Spring JPA +
  5.2 Using _csrf ? What is it? When do we use it?
  5.3 Using account in database instead of adding a user into memory.
   
-  
+# Run demo
+1. Open terminal
+2. Run `mvnw spring-boot:run`
+3. [Optional] Debugging: comment out `configuration` field in pom.xml
