@@ -23,7 +23,10 @@ public class AppSecurity extends WebSecurityConfigurerAdapter {
 			.loginPage("/login")
 			.permitAll()
 			.and()
-		.logout().permitAll();
+		.logout()
+			.logoutUrl("/logout")
+			.logoutSuccessUrl("/index")
+		;
 	}
 	
 	@Bean

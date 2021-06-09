@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import java.awt.print.Book;
 import java.security.Principal;
 
 import javax.annotation.Resource;
@@ -38,11 +39,5 @@ public class HomeController {
 	public String login (Model model) {
 		model.addAttribute("loginForm",new LoginModel());
 		return "login";
-	}
-	
-	@GetMapping("/logout")
-	public String logout () {
-		springSessionRepositoryFilter.destroy();
-		return "/index";
 	}
 }
