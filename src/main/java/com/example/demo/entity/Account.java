@@ -40,6 +40,10 @@ public class Account {
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
 	@JoinColumn(name = "account_id")
 	private List<Comment> comments;
+	
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+	@JoinColumn(name="account_id")
+	private List<RoleLinked> roleLinked;
 
 	public Integer getId() {
 		return id;
@@ -89,6 +93,22 @@ public class Account {
 		this.endDate = endDate;
 	}
 	
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
+
+	public List<RoleLinked> getRoleLinked() {
+		return roleLinked;
+	}
+
+	public void setRoleLinked(List<RoleLinked> roleLinked) {
+		this.roleLinked = roleLinked;
+	}
+
 	public boolean compare(Account account) {
 		return  this.id.equals(account.getId())
 				&& this.user.equals(account.getUser())

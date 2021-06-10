@@ -1,15 +1,11 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head> 
-    <title>Say hello</title> 
+    <title>Admin page</title> 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-	<div th:switch="${name}"> 
-	  <h1 th:case="null" th:text="'Welcome to the world'"></h1>
-	  <h1 th:case="*" th:text="'Hey, ' + ${name} + '!'"></h1>
-	</div>
-    
+    <h1 th:text="'Hello sir, How are you today?'"></h1>
     <a href="javascript: document.logoutForm.submit()" class="dropdown-toggle">Sign out</a>
     <form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
         <input hidden type="submit" value="Sign Out" />

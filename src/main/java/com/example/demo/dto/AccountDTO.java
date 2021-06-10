@@ -12,6 +12,7 @@ public class AccountDTO implements Serializable{
 	private Date startDate;
 	private Date endDate;
 	private List<CommentDTO> comments;
+	private List<RoleLinkedDTO> roleLinkedDTOs;
 
 	public Integer getId() {
 		return id;
@@ -68,4 +69,13 @@ public class AccountDTO implements Serializable{
 	public void setComments(List<CommentDTO> comments) {
 		this.comments = comments;
 	}
+
+	public List<RoleLinkedDTO> getRoleLinkedDTOs() {
+		return roleLinkedDTOs;
+	}
+
+	public void setRoleLinkedDTOs(List<RoleLinkedDTO> roleLinkedDTOs) {
+		this.roleLinkedDTOs = roleLinkedDTOs;
+	}
+	
 }

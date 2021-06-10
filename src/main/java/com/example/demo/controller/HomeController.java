@@ -1,12 +1,12 @@
 package com.example.demo.controller;
 
-import java.awt.print.Book;
 import java.security.Principal;
 
 import javax.annotation.Resource;
 import javax.servlet.Filter;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,5 +39,11 @@ public class HomeController {
 	public String login (Model model) {
 		model.addAttribute("loginForm",new LoginModel());
 		return "login";
+	}
+	
+	@GetMapping("/vip")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	public String vip() {
+		return "admin-only";
 	}
 }

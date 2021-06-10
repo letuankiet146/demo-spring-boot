@@ -1,12 +1,16 @@
 package com.example.demo.security.model;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.example.demo.dto.AccountDTO;
+import com.example.demo.dto.RoleDTO;
+import com.example.demo.dto.RoleLinkedDTO;
 
 public class SecurityAccount implements UserDetails{
 	private static final long serialVersionUID = 1L;
@@ -26,8 +30,12 @@ public class SecurityAccount implements UserDetails{
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		// TODO Auto-generated method stub
-		return null;
+		List<RoleLinkedDTO> roleLinkedDTOs =  account.getRoleLinkedDTOs();
+		List<RoleDTO> roleDTOs = new ArrayList<RoleDTO>();
+		for(RoleLinkedDTO roleLinkedDTO : roleLinkedDTOs) {
+			roleDTOs.add(roleLinkedDTO.getRole());
+		}
+		return roleDTOs;
 	}
 
 	@Override

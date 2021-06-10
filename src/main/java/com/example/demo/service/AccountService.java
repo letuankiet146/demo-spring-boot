@@ -3,16 +3,17 @@ package com.example.demo.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.dao.AccountCustomRepository;
 import com.example.demo.dao.AccountRepository;
 import com.example.demo.dto.AccountDTO;
+import com.example.demo.dto.RoleDTO;
+import com.example.demo.dto.RoleLinkedDTO;
 import com.example.demo.entity.Account;
+import com.example.demo.entity.Role;
+import com.example.demo.entity.RoleLinked;
 
 @Service
 public class AccountService implements IAccountService {
@@ -54,6 +55,18 @@ public class AccountService implements IAccountService {
 		return accountDTOs;
 	}
 	
+	@Override
+	public List<RoleLinkedDTO> findRoleLinked(Integer accountId) {
+		List<RoleLinked> roleLinkeds = accountCustomRepo.findRoleLinked(accountId);
+		List<RoleLinkedDTO> roleLinkedDTOs = new ArrayList<RoleLinkedDTO>();
+		for (RoleLinked roleLinked : roleLinkeds) {
+			RoleLinkedDTO roleLinkedDTO = new RoleLinkedDTO();
+			roleLinkedDTO.setId(roleLinked.getId());
+			roleLinkedDTO.setRole(migrateToRoleDTO(roleLinked.getRole()));
+		}
+		return roleLinkedDTOs;
+	}
+	
 	private AccountDTO migrateToAccountDTO (Account account) {
 		AccountDTO accountDTO = new AccountDTO();
 		accountDTO.setId(account.getId());
@@ -62,7 +75,31 @@ public class AccountService implements IAccountService {
 		accountDTO.setBlocked(account.isBlocked());
 		accountDTO.setStartDate(account.getStartDate());
 		accountDTO.setEndDate(account.getEndDate());		
+		accountDTO.setRoleLinkedDTOs(migrateToRoleLinkedList(account.getRoleLinked()));
 		return accountDTO;
+	}
+	
+	private List<RoleLinkedDTO> migrateToRoleLinkedList(List<RoleLinked> roleLinkeds) {
+		List<RoleLinkedDTO> roleLinkedDTOs = new ArrayList<RoleLinkedDTO>();
+		for (RoleLinked roleLinked : roleLinkeds) {
+			roleLinkedDTOs.add(migrateToRoleLinkedDTO(roleLinked));
+		}
+		return roleLinkedDTOs;
+	}
+
+	private RoleLinkedDTO migrateToRoleLinkedDTO(RoleLinked roleLinked) {
+		RoleLinkedDTO roleLinkedDTO = new RoleLinkedDTO();
+		roleLinkedDTO.setId(roleLinked.getId());
+		roleLinkedDTO.setRole(migrateToRoleDTO(roleLinked.getRole()));
+		return roleLinkedDTO;
+	}
+
+	private RoleDTO migrateToRoleDTO (Role role) {
+		RoleDTO roleDto = new RoleDTO();
+		roleDto.setId(role.getId());
+		roleDto.setLevel(role.getLevel());
+		roleDto.setDescr(role.getDescr());
+		return roleDto;
 	}
 
 }
