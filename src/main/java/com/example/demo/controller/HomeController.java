@@ -38,7 +38,6 @@ public class HomeController {
 	}
 	
 	@GetMapping("/vip")
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public String vip() {
 		return "admin-only";
 	}

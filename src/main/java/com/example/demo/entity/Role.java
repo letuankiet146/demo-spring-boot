@@ -13,7 +13,8 @@ import org.springframework.security.core.GrantedAuthority;
 
 @Entity
 @Table(name="role")
-public class Role{
+public class Role implements GrantedAuthority{
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="role_id")
@@ -24,7 +25,11 @@ public class Role{
 	
 	@Column(name="role_descr")
 	private String descr;
-	
+	public Role() {}
+	public Role(UserRole userRole){
+		this.level = userRole.getLevel();
+		this.descr = userRole.getDescr();
+	}
 	public Integer getId() {
 		return id;
 	}
@@ -47,5 +52,9 @@ public class Role{
 
 	public void setDescr(String descr) {
 		this.descr = descr;
+	}
+	@Override
+	public String getAuthority() {
+		return this.level;
 	}
 }

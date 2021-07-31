@@ -21,8 +21,7 @@ public class SecurityService implements UserDetailsService {
 		if (accountDTO == null) {
             throw new UsernameNotFoundException(username);
         }
-		SecurityAccount securityAccount =new SecurityAccount(accountDTO);
-		return  new SecurityAccount(accountDTO);
+		return new SecurityAccount(accountDTO);
 	}
 
 }

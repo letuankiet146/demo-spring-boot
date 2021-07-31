@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -11,12 +12,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "account")
-public class Account {
+public class Account implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "account_id")
@@ -41,9 +44,11 @@ public class Account {
 	@JoinColumn(name = "account_id")
 	private List<Comment> comments;
 	
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
-	@JoinColumn(name="account_id")
-	private List<RoleLinked> roleLinked;
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name="role_linked"
+				,joinColumns = @JoinColumn(name="account_id",referencedColumnName = "account_id")
+				,inverseJoinColumns = @JoinColumn(name="role_id", referencedColumnName = "role_id"))
+	private List<Role> roles;
 
 	public Integer getId() {
 		return id;
@@ -101,12 +106,12 @@ public class Account {
 		this.comments = comments;
 	}
 
-	public List<RoleLinked> getRoleLinked() {
-		return roleLinked;
+	public List<Role> getRoles() {
+		return roles;
 	}
 
-	public void setRoleLinked(List<RoleLinked> roleLinked) {
-		this.roleLinked = roleLinked;
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
 	}
 
 	public boolean compare(Account account) {

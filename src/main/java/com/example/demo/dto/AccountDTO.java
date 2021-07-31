@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import com.example.demo.entity.Role;
+
 public class AccountDTO implements Serializable{
 	private Integer id;
 	private String user;
@@ -12,7 +14,7 @@ public class AccountDTO implements Serializable{
 	private Date startDate;
 	private Date endDate;
 	private List<CommentDTO> comments;
-	private List<RoleLinkedDTO> roleLinkedDTOs;
+	private List<Role> roles;
 
 	public Integer getId() {
 		return id;
@@ -70,12 +72,11 @@ public class AccountDTO implements Serializable{
 		this.comments = comments;
 	}
 
-	public List<RoleLinkedDTO> getRoleLinkedDTOs() {
-		return roleLinkedDTOs;
+	public List<Role> getRoles() {
+		return roles;
 	}
 
-	public void setRoleLinkedDTOs(List<RoleLinkedDTO> roleLinkedDTOs) {
-		this.roleLinkedDTOs = roleLinkedDTOs;
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
 	}
-	
 }
