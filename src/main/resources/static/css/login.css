@@ -23,7 +23,7 @@ width: 400px;
 background-color: rgba(0,0,0,0.5) !important;
 }
 
-.social_icon span{
+.social_icon span a{
 font-size: 60px;
 margin-left: 10px;
 color: #FFC312;
@@ -41,7 +41,7 @@ color: white;
 .social_icon{
 position: absolute;
 right: 20px;
-top: -45px;
+top: -35px;
 }
 
 .input-group-prepend span{

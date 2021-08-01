@@ -7,7 +7,6 @@ import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -33,7 +32,8 @@ public class AppSecurity extends WebSecurityConfigurerAdapter {
 			.logout()
 			.logoutUrl("/logout")
 			.logoutSuccessUrl("/index")
-		.and();
+		.and()
+			.oauth2Login().loginPage("/oauth2/authorization/facebook").permitAll();
 	}
 
 	@Bean
