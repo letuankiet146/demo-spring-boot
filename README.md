@@ -21,6 +21,7 @@ Project use to practice Spring Boot that include of: Spring WebMVC+ Spring JPA +
  5.1 What is default configuration of the Spring Security
  5.2 Using _csrf ? What is it? When do we use it?
  5.3 Using account in database instead of adding a user into memory.
+ 5.4 Using Oauth2 login
   
 # Run demo
 1. Open terminal
