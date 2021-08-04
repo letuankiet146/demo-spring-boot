@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.dao.CommentRepository;
@@ -42,5 +43,11 @@ public class CommentService implements ICommentService {
 			commentsDTO.add(commentDTO);
 		}
 		return commentsDTO;
+	}
+
+	@Override
+	@PreAuthorize("hasRole('ADMIN')")
+	public void deleteAllComments() {
+		System.out.println("You have deleted all comments");
 	}
 }

@@ -13,8 +13,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler;
 
 @Configuration
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(securedEnabled = true)
 public class AppSecurity extends WebSecurityConfigurerAdapter {
 	public static final Integer ROUND_CRYPT = 10;
 

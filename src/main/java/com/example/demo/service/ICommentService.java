@@ -6,4 +6,5 @@ import com.example.demo.dto.CommentDTO;
 
 public interface ICommentService {
 	List<CommentDTO> findCommentByAccountId(Integer accounId);
+	void deleteAllComments();
 }
