@@ -24,7 +24,11 @@ Project use to practice Spring Boot that include of: Spring WebMVC+ Spring JPA +
  5.4 Using Oauth2 login<br/>
  5.5 Setting level of role <br/>
  5.6 `@PreAuthorize("hasRole('ADMIN')")` should be placed in Service component<br/>
-  
+
+6. Configuration property<br>
+ 6.1 Defining the configurationProperty bean which use to get property value from .property and .yml file<br>
+ 6.2 Please add `maven-resources-plugin` while intending to use .propety and .yml at the same time.<br>
+
 # Run demo
 1. Open terminal
 2. Run `mvnw spring-boot:run`
