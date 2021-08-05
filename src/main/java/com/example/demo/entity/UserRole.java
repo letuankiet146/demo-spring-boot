@@ -22,5 +22,4 @@ public enum UserRole {
 	public void setDescr(String descr) {
 		this.descr = descr;
 	}
-	
 }

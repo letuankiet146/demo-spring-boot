@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import com.example.demo.config.PropertyConfig;
 import com.example.demo.entity.Account;
 import com.example.demo.entity.Role;
 import com.example.demo.entity.UserRole;
@@ -21,14 +22,17 @@ public class PostProcess {
 	private IAccountService accountService;
 	
 	@Autowired
+	private PropertyConfig conf;
+	
+	@Autowired
 	private PasswordEncoder encoder;
 	
 	public PostProcess intitDefaultAccount() {
 		Account account = new Account();
-		account.setUser("demoer");
-		account.setPassword(encoder.encode("Passw0rd"));;
+		account.setUser(conf.getDefaultUser());
+		account.setPassword(encoder.encode(conf.getDefaultPassword()));;
 		account.setStartDate(new Date());
-		Role role = accountService.findRoleByLevel(UserRole.ADMIN.getLevel());
+		Role role = accountService.findRoleByLevel(UserRole.valueOf(conf.getDefaultRole()).getLevel());
 		List<Role> roles = new ArrayList<Role>();
 		roles.add(role);
 		account.setRoles(roles);
