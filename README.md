@@ -28,6 +28,11 @@ Project use to practice Spring Boot that include of: Spring WebMVC+ Spring JPA +
 6. Configuration property<br>
  6.1 Defining the configurationProperty bean which use to get property value from .property and .yml file<br>
  6.2 Please add `maven-resources-plugin` while intending to use .propety and .yml at the same time.<br>
+ 6.3 Using profile:
+  <ul>
+  	<li>Defining profiles.</li>
+  	<li>Select profile while running: run with java:`spring.profiles.active=prod` . Run with spring-boot: `-Dspring-boot.run,profiles=prod`</li>
+  </ul>
 
 # Run demo
 1. Open terminal
