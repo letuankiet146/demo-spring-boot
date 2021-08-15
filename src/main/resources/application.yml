@@ -1,5 +1,11 @@
 demo:
  config:
-  defaultUser: cool
-  defaultPassword: cool
+  defaultUser: admin
+  defaultPassword: admin
   defaultRole: ADMIN
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://localhost:8000/oauth2/jwks

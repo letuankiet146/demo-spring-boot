@@ -2,6 +2,7 @@ package com.example.demo.security.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -23,7 +24,7 @@ public class AppSecurity extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests()
 			.expressionHandler(webSecurityExpressionHandler())
 			.antMatchers("/css/**").permitAll()
-			.antMatchers("/vip").hasRole("MOD")
+			.antMatchers(HttpMethod.POST, "/account").hasAuthority("SCOPE_readComments")
 			.anyRequest().authenticated()
 		.and()
 			.formLogin()
@@ -33,7 +34,10 @@ public class AppSecurity extends WebSecurityConfigurerAdapter {
 			.logoutUrl("/logout")
 			.logoutSuccessUrl("/index")
 		.and()
-			.oauth2Login().loginPage("/oauth2/authorization/facebook").permitAll();
+			.oauth2Login().loginPage("/oauth2/authorization/facebook").permitAll()
+		.and()
+			.oauth2ResourceServer().jwt()
+			;
 	}
 
 	@Bean

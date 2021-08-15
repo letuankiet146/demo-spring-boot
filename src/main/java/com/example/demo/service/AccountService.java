@@ -73,4 +73,9 @@ public class AccountService implements IAccountService {
 		return roleRepo.findByLevel(level);
 	}
 
+	@Override
+	public AccountDTO findById(Integer id) {
+		return migrateToAccountDTO(accountRepo.findById(id).get());
+	}
+
 }

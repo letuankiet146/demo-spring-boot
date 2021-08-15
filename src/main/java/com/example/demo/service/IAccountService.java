@@ -8,6 +8,7 @@ import com.example.demo.entity.Role;
 
 public interface IAccountService {
 	AccountDTO findByUser(String user);
+	AccountDTO findById(Integer id);
 	Integer insert(Account account);
 	void delete(Integer accountId);
 	List<AccountDTO> findFans(List<String> descrKeyWord);

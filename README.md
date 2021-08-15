@@ -34,6 +34,9 @@ Project use to practice Spring Boot that include of: Spring WebMVC+ Spring JPA +
   	<li>Select profile while running: run with java:`spring.profiles.active=prod` . Run with spring-boot: `-Dspring-boot.run,profiles=prod`</li>
   </ul>
 
+7. OAuth2 Resource server
+ <p>* Need a authorization server (return a token). Resource server decode token (use puplic key though requesting from Authorization server) to get client/secret id and use as the user/password value.</p>
+
 # Run demo
 1. Open terminal
 2. Run `mvnw spring-boot:run`

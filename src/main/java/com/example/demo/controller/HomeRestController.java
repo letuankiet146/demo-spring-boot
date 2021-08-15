@@ -1,18 +1,23 @@
 package com.example.demo.controller;
 
+import java.security.Principal;
 import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.dto.AccountDTO;
 import com.example.demo.dto.CommentDTO;
+import com.example.demo.entity.Account;
+import com.example.demo.entity.Comment;
 import com.example.demo.service.IAccountService;
 import com.example.demo.service.ICommentService;
+import com.example.demo.view.model.FindAccountReq;
 
 @RestController
 public class HomeRestController {
@@ -23,8 +28,8 @@ public class HomeRestController {
 	IAccountService accountServ;
 	
 	@GetMapping("/hello")
-	public String hello(@RequestParam(value = "name", defaultValue = "World") String accountUser) {
-		
+	public String hello( Principal account) {
+		String accountUser = account.getName();
 		AccountDTO accountDTO = accountServ.findByUser(accountUser);
 		if (accountDTO == null) {
 			return String.format("Opps! you have not registered yet");
@@ -49,5 +54,19 @@ public class HomeRestController {
 			sb.append("\n");
 		}
 		return String.format("Your fans: %s ", sb.toString());
+	}
+	
+	@PostMapping("/account")
+	public AccountDTO getAccountInfo(@RequestBody FindAccountReq body) {
+		String type = body.getType();
+		String value = body.getValue();
+		switch (type) {
+		case "id" :
+			return accountServ.findById(Integer.valueOf(value));
+		case "name":
+			return accountServ.findByUser(value);
+		default :
+			return new AccountDTO();
+		}
 	}
 }
